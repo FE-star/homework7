@@ -73,11 +73,13 @@ describe('正则表达式', () => {
   it('匹配邮箱', () => {
     [
       '12345@qq.com',
+      '12345.123.123@qq.com'
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
     [
       '12345#qq.com',
+      '12345.@qq.com'
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });

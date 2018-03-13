@@ -106,6 +106,7 @@ describe('正则表达式', () => {
     });
     [
       '256.0.0.0',
+      '0.0.0.0',
     ].forEach((value) => {
       assert.ok(!RegExps.ipv4.test(value));
     });
@@ -114,6 +115,7 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+      '35030119890618006x',
     ].forEach((value) => {
       assert.ok(RegExps.idcard.test(value));
     });

@@ -114,15 +114,15 @@ describe('正则表达式', () => {
     [
       '350301198906180060',
     ].forEach((value) => {
-      assert.ok(RegExps.idcard.test(value));
+      assert.ok(RegExps.idcard(value));
     });
     [
-      // '350301298906180060', // 个人认为身份证上的年龄中年份第一位为1|2，其他位不应有限制
-      // '350301298906310060', // 这个月和日是否有效未完成。。。
+      '350301298906180060',
+      '350301298906310060',
       '35030129890618006Y',
       '3503012989061800666',
     ].forEach((value) => {
-      assert.ok(!RegExps.idcard.test(value));
+      assert.ok(!RegExps.idcard(value));
     });
   });
 

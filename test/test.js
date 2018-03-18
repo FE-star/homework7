@@ -15,6 +15,7 @@ describe('正则表达式', () => {
       '13800000000',
       '14712341234',
       '15012341234',
+      '150-1234-1234',
     ].forEach((mobile) => {
       assert.ok(RegExps.mobile.test(mobile));
     });
@@ -23,7 +24,7 @@ describe('正则表达式', () => {
       '1471234l234',
       '147000000000',
       '150-123-41234',
-      '150-1234-1234',
+      // '150-1234-1234', // 这个号码应该是可以的
     ].forEach((mobile) => {
       assert.ok(!RegExps.mobile.test(mobile));
     });
@@ -113,7 +114,7 @@ describe('正则表达式', () => {
     [
       '350301198906180060',
     ].forEach((value) => {
-      assert.ok(RegExps.idcard.test(value));
+      assert.ok(RegExps.idcard(value));
     });
     [
       '350301298906180060',
@@ -121,7 +122,7 @@ describe('正则表达式', () => {
       '35030129890618006Y',
       '3503012989061800666',
     ].forEach((value) => {
-      assert.ok(!RegExps.idcard.test(value));
+      assert.ok(!RegExps.idcard(value));
     });
   });
 

@@ -86,6 +86,8 @@ describe('正则表达式', () => {
   it('匹配 url', () => {
     [
       'https://www.qq.com',
+      'http://www.baidu.com',
+      'https://www.qq.com:8080',
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });
@@ -112,12 +114,15 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+      '350301198906180060',
     ].forEach((value) => {
       assert.ok(RegExps.idcard.test(value));
     });
     [
       '350301298906180060',
       '350301298906310060',
+      '350301298900310060',
+      '350301298906000060',
       '35030129890618006Y',
       '3503012989061800666',
     ].forEach((value) => {

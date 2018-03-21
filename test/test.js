@@ -15,11 +15,9 @@ describe('正则表达式', () => {
       '15712341234',
       '17012341234',
       '18012341234'
-    ].forEach(
-      mobile => {
-        assert.ok(RegExps.mobile.test(mobile));
-      }
-    );
+    ].forEach((mobile) => {
+      assert.ok(RegExps.mobile.test(mobile));
+    });
     [
       '1873482665',
       '23800000000',
@@ -28,7 +26,7 @@ describe('正则表达式', () => {
       '150-123-41234',
       '150-1234-1234',
       '150.1234.1234'
-    ].forEach(mobile => {
+    ].forEach((mobile) => {
       assert.ok(!RegExps.mobile.test(mobile));
     });
   });
@@ -38,14 +36,14 @@ describe('正则表达式', () => {
       '10000',
       '987654321',
       '12345678900'
-    ].forEach(qq => {
+    ].forEach((qq) => {
       assert.ok(RegExps.qq.test(qq));
     });
     [
       '1000',
       '0987654321',
       '123456789000'
-    ].forEach(qq => {
+    ].forEach((qq) => {
       assert.ok(!RegExps.qq.test(qq));
     });
   });
@@ -65,7 +63,7 @@ describe('正则表达式', () => {
       '10000',
       '10000.',
       '100.00'
-    ].forEach(number => {
+    ].forEach((number) => {
       assert.ok(RegExps.number.test(number));
     });
     [
@@ -76,7 +74,7 @@ describe('正则表达式', () => {
       '0.+5',
       '0.5+',
       '+-0.5'
-    ].forEach(number => {
+    ].forEach((number) => {
       assert.ok(!RegExps.number.test(number));
     });
   });
@@ -95,7 +93,6 @@ describe('正则表达式', () => {
       '_123sdf@qq.com',
       '12345#qq.com',
       ' 123asdf@126.com'
-
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });

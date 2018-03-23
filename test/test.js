@@ -5,6 +5,7 @@
  * @Last Modified time: 2018-03-10 22:48:51
  */
 
+
 const assert = require('assert');
 const RegExps = require('..');
 
@@ -78,6 +79,7 @@ describe('正则表达式', () => {
     });
     [
       '12345#qq.com',
+      '1 2345#qq.com',
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });

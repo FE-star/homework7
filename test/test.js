@@ -78,6 +78,7 @@ describe('正则表达式', () => {
     });
     [
       '12345#qq.com',
+      '1 2345#qq.com',
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });

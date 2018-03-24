@@ -73,11 +73,17 @@ describe('正则表达式', () => {
   it('匹配邮箱', () => {
     [
       '12345@qq.com',
+      '12345@qq.com.cn',
+      '1234.5@qq.com.cn'
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
     [
       '12345#qq.com',
+      '12345@qq.com.cn.',
+      '1234..5@qq.com',
+      '.12345@qq.com',
+      '12345@qq.com_'
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });
@@ -86,11 +92,18 @@ describe('正则表达式', () => {
   it('匹配 url', () => {
     [
       'https://www.qq.com',
+      'http://www.qq.com'
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });
     [
       'http//www.qq.com',
+      'http//www.qq.com.',
+      'http//www.qq.com_',
+      'http//www.qq..com',
+      'ftp://.qq.com',
+      'ftp://com',
+      'ftp://.com'
     ].forEach((value) => {
       assert.ok(!RegExps.url.test(value));
     });
@@ -112,12 +125,14 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+      '35030119890618006X',
     ].forEach((value) => {
       assert.ok(RegExps.idcard.test(value));
     });
     [
       '350301298906180060',
       '350301298906310060',
+      '350301998000310060',
       '35030129890618006Y',
       '3503012989061800666',
     ].forEach((value) => {

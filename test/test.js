@@ -65,6 +65,14 @@ describe('正则表达式', () => {
     [
       '.5.5',
       '1.5.5',
+      '',
+      '.',
+      '+',
+      '-',
+      '.+',
+      '.-',
+      '+.',
+      '-.',
     ].forEach((number) => {
       assert.ok(!RegExps.number.test(number));
     });
@@ -73,11 +81,16 @@ describe('正则表达式', () => {
   it('匹配邮箱', () => {
     [
       '12345@qq.com',
+    'zzzzzz@gmail.com',
+    '12345@yahoo.co.jp',
+    '12345@163.com',
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
     [
       '12345#qq.com',
+      '12345@163@.com',
+      'Abc.example.com',
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });
@@ -86,11 +99,15 @@ describe('正则表达式', () => {
   it('匹配 url', () => {
     [
       'https://www.qq.com',
+    'http://www.baidu.com/',
+    'https://github.com/FE-star/homework7/pull/28/files',
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });
     [
       'http//www.qq.com',
+      'http://qqcom',
+      'aaa://qqcom',
     ].forEach((value) => {
       assert.ok(!RegExps.url.test(value));
     });
@@ -99,11 +116,16 @@ describe('正则表达式', () => {
   it('匹配 IPv4', () => {
     [
       '127.0.0.1',
+    '0.0.0.0',
+    '27.0.0.1'
     ].forEach((value) => {
       assert.ok(RegExps.ipv4.test(value));
     });
     [
       '256.0.0.0',
+      '256.256.256.256',
+      'a255.255.255.255',
+      '256.256.0.-1',
     ].forEach((value) => {
       assert.ok(!RegExps.ipv4.test(value));
     });
@@ -112,6 +134,7 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+    '110200199311299431',
     ].forEach((value) => {
       assert.ok(RegExps.idcard.test(value));
     });

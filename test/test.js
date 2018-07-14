@@ -1,6 +1,6 @@
 /*
- * @Author: kael 
- * @Date: 2018-02-14 17:35:48 
+ * @Author: kael
+ * @Date: 2018-02-14 17:35:48
  * @Last Modified by: kael
  * @Last Modified time: 2018-03-10 22:48:51
  */
@@ -15,7 +15,17 @@ describe('正则表达式', () => {
       '13800000000',
       '14712341234',
       '15012341234',
+      '17600000152',
+      '0352-88888888',
+      '010-88999525',
+      '010-95169001',
+      '110',
+      '2580',
+      '10010'
     ].forEach((mobile) => {
+      if (!RegExps.mobile.test(mobile)) {
+        console.log(mobile);
+      }
       assert.ok(RegExps.mobile.test(mobile));
     });
     [
@@ -60,12 +70,21 @@ describe('正则表达式', () => {
       '10000.',
       '100.00',
     ].forEach((number) => {
+      if (!RegExps.number.test(number)) {
+        console.log(number);
+      }
       assert.ok(RegExps.number.test(number));
     });
     [
       '.5.5',
       '1.5.5',
+      '.',
+      '+.',
+      '1. 6'
     ].forEach((number) => {
+      if (RegExps.number.test(number)) {
+        console.log(number);
+      }
       assert.ok(!RegExps.number.test(number));
     });
   });
@@ -73,12 +92,20 @@ describe('正则表达式', () => {
   it('匹配邮箱', () => {
     [
       '12345@qq.com',
+      'meiya@cn-meiya.com',
+      'wq901200@hotmail.com',
+      'meiyuan@0757info.com',
+      'tony@erene.com.com'
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
     [
       '12345#qq.com',
+      '@qq.com'
     ].forEach((value) => {
+      if (RegExps.email.test(value)) {
+        console.log(value);
+      }
       assert.ok(!RegExps.email.test(value));
     });
   });
@@ -86,7 +113,17 @@ describe('正则表达式', () => {
   it('匹配 url', () => {
     [
       'https://www.qq.com',
+      'http://www.qq.com/a.js',
+      'https://www.qq.com.cn/a.js',
+      'ftp://www.qq.com/a.js?name=zhangsan',
+      'ftp://www.qq.com:80/a.js?name=zhangsan',
+      'ftps://www.qq.com/a.js?name=zhangsan&age=18',
+      'ftps://www.qq-inc.com/a.js?name_1=zhangsan&age=11',
+      'http://www.qq-inc.com/src/a.js?name_1=zhangsan&age=11',
     ].forEach((value) => {
+      if (!RegExps.url.test(value)) {
+        console.log(value);
+      }
       assert.ok(RegExps.url.test(value));
     });
     [
@@ -99,6 +136,8 @@ describe('正则表达式', () => {
   it('匹配 IPv4', () => {
     [
       '127.0.0.1',
+      '23.135.2.255',
+      '255.255.0.256'
     ].forEach((value) => {
       assert.ok(RegExps.ipv4.test(value));
     });
@@ -112,15 +151,23 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+      '130981199312253466',
+      '11010519491231002X'
     ].forEach((value) => {
+      if (!RegExps.idcard.test(value)) {
+        console.log(value);
+      }
       assert.ok(RegExps.idcard.test(value));
     });
     [
       '350301298906180060',
       '350301298906310060',
       '35030129890618006Y',
-      '3503012989061800666',
+      '3503012989061800666'
     ].forEach((value) => {
+      if (RegExps.idcard.test(value)) {
+        console.log(value);
+      }
       assert.ok(!RegExps.idcard.test(value));
     });
   });

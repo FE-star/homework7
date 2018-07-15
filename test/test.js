@@ -15,15 +15,23 @@ describe('正则表达式', () => {
       '13800000000',
       '14712341234',
       '15012341234',
+      '14914914914',
+      '19919999199',
+      '16616616616',
+      '19819819819'
     ].forEach((mobile) => {
       assert.ok(RegExps.mobile.test(mobile));
     });
     [
       '23800000000',
-      '1471234l234',
       '147000000000',
       '150-123-41234',
       '150-1234-1234',
+      '1441441441441',
+      '1971971971971',
+      '1611611616161',
+      '1411411411411',
+      'asd516516asd1'
     ].forEach((mobile) => {
       assert.ok(!RegExps.mobile.test(mobile));
     });
@@ -34,6 +42,7 @@ describe('正则表达式', () => {
       '10000',
       '987654321',
       '12345678900',
+      '541226467'
     ].forEach((qq) => {
       assert.ok(RegExps.qq.test(qq));
     });
@@ -41,6 +50,8 @@ describe('正则表达式', () => {
       '1000',
       '0987654321',
       '123456789000',
+      '1232342331a',
+      'a15162222'
     ].forEach((qq) => {
       assert.ok(!RegExps.qq.test(qq));
     });
@@ -65,6 +76,7 @@ describe('正则表达式', () => {
     [
       '.5.5',
       '1.5.5',
+      '*.5'
     ].forEach((number) => {
       assert.ok(!RegExps.number.test(number));
     });
@@ -73,11 +85,15 @@ describe('正则表达式', () => {
   it('匹配邮箱', () => {
     [
       '12345@qq.com',
+      '231@github.com',
+      '666@github.cn'
     ].forEach((value) => {
       assert.ok(RegExps.email.test(value));
     });
     [
       '12345#qq.com',
+      '231@github.666',
+      '231github.com'
     ].forEach((value) => {
       assert.ok(!RegExps.email.test(value));
     });
@@ -86,6 +102,7 @@ describe('正则表达式', () => {
   it('匹配 url', () => {
     [
       'https://www.qq.com',
+      'https://www.asd.com',
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });

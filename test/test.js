@@ -4,7 +4,7 @@
  ** @author jinxuan_lin <jinxuan_lin@kingdee.com>
  ** @date 2018-11-27 15:44:40
  ** @last_modified_by jinxuan_lin <jinxuan_lin@kingdee.com>
- ** @last_modified_date 2018-11-28 14:20:16
+ ** @last_modified_date 2018-11-28 14:25:11
  ** @copyright (c) 2018 @yfe/homework7
  ** ********************************************************
  */
@@ -95,7 +95,7 @@ describe('正则表达式', () => {
   });
 
   it('匹配身份证号码', () => {
-    ['350301198906180060', '441522199212104960'].forEach(value => {
+    ['350301198906180060'].forEach(value => {
       assert.ok(RegExps.idcard.test(value));
     });
     [

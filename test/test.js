@@ -6,7 +6,9 @@
  */
 
 const assert = require('assert');
-const RegExps = require('..');
+const RegExps = require('../lib/RegExps');
+
+console.log(RegExps);
 
 describe('正则表达式', () => {
 

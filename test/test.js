@@ -98,13 +98,18 @@ describe('正则表达式', () => {
       'https://www.qq.com',
       'www.hao123.com',
       'http://www.hao-123.com',
-      'www.hao-12-345.com'
+      'www.hao-12-345.com',
+      'https://api.github.com/user/emails',
+      'https://api.github.com/user/emails?u=luo&p=123',
+      'https://api.github.com/user/emails?u&p'
     ].forEach((value) => {
       assert.ok(RegExps.url.test(value));
     });
     [
       'http//www.qq.com',
-      'www.hao--123.com'
+      'www.hao--123.com',
+      'www.hao--123.com?&',
+      'www.hao--123.com?a&&b'
     ].forEach((value) => {
       assert.ok(!RegExps.url.test(value));
     });

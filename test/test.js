@@ -120,6 +120,7 @@ describe('正则表达式', () => {
   it('匹配身份证号码', () => {
     [
       '350301198906180060',
+      '35030119890618006X',
     ].forEach((value) => {
       assert.ok(RegExps.idcard.test(value));
     });

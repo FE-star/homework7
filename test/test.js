@@ -79,29 +79,57 @@ describe('正则表达式', () => {
   });
 
   it('匹配邮箱', () => {
-    [
-      '12345@qq.com',
-    ].forEach((value) => {
-      assert.ok(RegExps.email.test(value));
-    });
-    [
-      '12345#qq.com',
-    ].forEach((value) => {
-      assert.ok(!RegExps.email.test(value));
-    });
+    const validEmails = [
+      '12345@qq.com', // 数字邮箱
+      'leopen@qq.com', // 字符邮箱
+      'leopen-123_@qq.com', // 组合邮箱
+      'leopen@mail.dd.dd.qq.com', // 支持多级域名
+    ]
+    validEmails.forEach((value) => {
+      assert.ok(RegExps.email.test(value))
+    })
+    const invalidEmails = [
+      'leopen#qq.com.cn', // 不可缺少 @
+      '_leopen@xxx.com', // 用户名不能以特殊字符开头
+      '@qq.com', // 用户名不能为空
+      'leopen@.com', // 主机名不能为空
+      'leopen@xxxcom', // 域名不能缺少 .
+      'leopen@xxx.', // 不能缺少域名后缀
+      'leopen@xxx.sdfdf', // 不能使用不合法域名后缀
+      'leopen@xxx..com', // 域名不能存在连续的 .
+    ]
+    invalidEmails.forEach((value) => {
+      assert.ok(!RegExps.email.test(value))
+    })
   });
 
   it('匹配 url', () => {
-    [
-      'https://www.qq.com',
-    ].forEach((value) => {
-      assert.ok(RegExps.url.test(value));
-    });
-    [
-      'http//www.qq.com',
-    ].forEach((value) => {
-      assert.ok(!RegExps.url.test(value));
-    });
+    const validUrl = [
+      'http://www.qq.com', // 支持 http
+      'https://www.qq.com', // 支持 https
+      'www.qq.com', // 支持无头
+      'qq.com', // 支持无头
+      'blog.sss.xd', // 支持自定义域名
+      'blog.sss.xd/sdm', // 支持路径
+      'blog.sss.xd/sdm/', // 支持尾部 /
+      'blog.sss.xd/sdm/?lo=x', // 支持query
+      'blog.sss.xd/sdm/?lo=x&df=3', // 支持多query
+    ]
+    validUrl.forEach((value) => {
+      assert.ok(RegExps.url.test(value))
+    })
+    const invalidUrl = [
+      'http//www.qq.com', // 协议不能缺少 ：
+      'cc://www.qq.com', // 不支持非 http https 协议
+      '.com', // 主机名不能为空
+      'xxxcom', // 域名不能缺少 .
+      'xxx.', // 不能缺少域名后缀
+      'xxx..com', // 域名不能存在连续的 .
+      'xxx.com//df', // 域名不能存在连续的 /
+    ]
+    invalidUrl.forEach((value) => {
+      assert.ok(!RegExps.url.test(value))
+    })
   });
 
   it('匹配 IPv4', () => {
@@ -125,9 +153,9 @@ describe('正则表达式', () => {
     });
     [
       '350301298906180060',
-      '350301298906310060',
-      '35030129890618006Y',
-      '3503012989061800666',
+      '350301199606310060',
+      '35030119960618006Y',
+      '3503011996061800666',
     ].forEach((value) => {
       assert.ok(!RegExps.idcard.test(value));
     });

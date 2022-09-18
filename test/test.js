@@ -104,16 +104,32 @@ describe('正则表达式', () => {
   });
 
   it('匹配 url', () => {
-    [
-      'https://www.qq.com',
-    ].forEach((value) => {
-      assert.ok(RegExps.url.test(value));
-    });
-    [
-      'http//www.qq.com',
-    ].forEach((value) => {
-      assert.ok(!RegExps.url.test(value));
-    });
+    const validUrl = [
+      'http://www.qq.com', // 支持 http
+      'https://www.qq.com', // 支持 https
+      'www.qq.com', // 支持无头
+      'qq.com', // 支持无头
+      'blog.sss.xd', // 支持自定义域名
+      'blog.sss.xd/sdm', // 支持路径
+      'blog.sss.xd/sdm/', // 支持尾部 /
+      'blog.sss.xd/sdm/?lo=x', // 支持query
+      'blog.sss.xd/sdm/?lo=x&df=3', // 支持多query
+    ]
+    validUrl.forEach((value) => {
+      assert.ok(RegExps.url.test(value))
+    })
+    const invalidUrl = [
+      'http//www.qq.com', // 协议不能缺少 ：
+      'cc://www.qq.com', // 不支持非 http https 协议
+      '.com', // 主机名不能为空
+      'xxxcom', // 域名不能缺少 .
+      'xxx.', // 不能缺少域名后缀
+      'xxx..com', // 域名不能存在连续的 .
+      'xxx.com//df', // 域名不能存在连续的 /
+    ]
+    invalidUrl.forEach((value) => {
+      assert.ok(!RegExps.url.test(value))
+    })
   });
 
   it('匹配 IPv4', () => {

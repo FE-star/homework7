@@ -1,16 +1,16 @@
 /*
  * @Author: kael 
  * @Date: 2018-02-14 17:50:28 
- * @Last Modified by: kael
- * @Last Modified time: 2018-07-10 16:50:09
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2022-09-18 22:10:53
  */
 
 module.exports = {
   mobile: /^1\d{10}$/,
   qq: /^[1-9]\d{4,10}$/,
   number: /^[-+]?(?:\d+(?:\.\d*)|(?:\d*\.)?\d+)$/,
-  email: /^.$/,
-  url: /^.$/,
-  ipv4: /^.$/,
-  idcard: /^.$/,
+  email: /^\d{5,9}@[a-zA-Z]+\.[a-zA-Z]+$/,
+  url: /^https?:\/\/www\.(?:[\w]+\.)+\w+$/,
+  ipv4: /(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))/g,
+  idcard: /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
 };

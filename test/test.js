@@ -79,16 +79,28 @@ describe('正则表达式', () => {
   });
 
   it('匹配邮箱', () => {
-    [
-      '12345@qq.com',
-    ].forEach((value) => {
-      assert.ok(RegExps.email.test(value));
-    });
-    [
-      '12345#qq.com',
-    ].forEach((value) => {
-      assert.ok(!RegExps.email.test(value));
-    });
+    const validEmails = [
+      '12345@qq.com', // 数字邮箱
+      'leopen@qq.com', // 字符邮箱
+      'leopen-123_@qq.com', // 组合邮箱
+      'leopen@mail.dd.dd.qq.com', // 支持多级域名
+    ]
+    validEmails.forEach((value) => {
+      assert.ok(RegExps.email.test(value))
+    })
+    const invalidEmails = [
+      'leopen#qq.com.cn', // 不可缺少 @
+      '_leopen@xxx.com', // 用户名不能以特殊字符开头
+      '@qq.com', // 用户名不能为空
+      'leopen@.com', // 主机名不能为空
+      'leopen@xxxcom', // 域名不能缺少 .
+      'leopen@xxx.', // 不能缺少域名后缀
+      'leopen@xxx.sdfdf', // 不能使用不合法域名后缀
+      'leopen@xxx..com', // 域名不能存在连续的 .
+    ]
+    invalidEmails.forEach((value) => {
+      assert.ok(!RegExps.email.test(value))
+    })
   });
 
   it('匹配 url', () => {
